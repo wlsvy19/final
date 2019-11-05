@@ -1,0 +1,323 @@
+@charset "UTF-8";
+/* 전체 영역 설정 */
+
+html, body { 
+   width : 100%;
+   height:100%;
+   background-color: #1f1f2e;
+}
+
+
+#allarea {
+   width: 100%;
+   height : 100%;
+   margin: auto;
+}
+
+#allarea_left{
+   float: left;
+   width: 23%;
+   height: 100%;
+}
+
+#allarea_right{
+   float : right;
+   width: 77%;
+   height: 100%;
+   background-color: white;
+   padding-bottom: 10%;
+}
+
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+#menuarea{
+   text-align: center;
+   width: 90%;
+   height : 100%;
+   color : white;
+}
+
+#manager_logo{
+   width: 67%;
+   height: 130px;
+   size: 100%;
+   float: left;
+   margin-left: 2%;
+   margin-top: 10%;
+   margin-bottom: 15%;
+}
+
+.managerImgBtn, .managerImgBtn2, .managerImgBtn3{
+   width: 50%;
+   height: 40px;
+   size: 100%;
+   float: left;
+   margin-left: 8%;
+   margin-bottom: 7%;
+}
+
+.managerImgBtn2{
+   width: 70%;
+}
+
+.managerImgBtn3{
+   width: 45%;
+}
+
+
+#menu{
+   width: 90%;
+   margin: auto;
+   text-align: right;
+   font-size: 30px;
+   margin-top: 3%;
+}
+
+hr:nth-of-type(1){
+   width: 90%;
+   height: 2px;
+   
+   margin:auto;
+   margin-top: 10px;
+   
+   background: black;
+   border: 0px;
+}
+
+/*상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품*/
+/*상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품상품*/
+
+#setTitle{
+   float: left; 
+   width : 30%;
+   height : 35px; 
+   
+   margin-top: 2%;
+   margin-left: 5.5%;
+   
+   line-height: 35px;
+}
+
+#setImg{
+   float: left; 
+   width : 35px;
+   height: 100%;
+   size : 100%;
+   
+   margin-right: 3%;
+}
+
+#addPro{
+   float: right;
+   display: inline-block;
+   width : 110px;
+   height : 35px; 
+   
+   margin-right: 5.5%;
+   margin-top: 2%;
+   
+   border : 1px solid #F15F5F; 
+   border-radius : 6px;
+   background-color: white; 
+   color : #F15F5F; 
+   
+   cursor: pointer;
+}
+
+#addPro:hover{
+   background-color: #F15F5F; 
+   color : white;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#product_div{
+   float: left; 
+   width: 90%;
+   border: none;
+   
+   margin-top: 2%;
+   margin-left : 5%;
+   
+   text-align: center;
+}
+
+#product_table{
+   width: 100%;
+   line-height : 2.2;
+   
+   margin: auto;
+   
+   border-collapse: collapse;
+   background-color: white;
+}
+
+#product_table .non_stop_tr, #product_table .non_stop_tr td{
+   border: 1px solid #EAEAEA;
+   border-left: none;
+   border-right: none;
+   font-family: 나눔바른펜;
+}
+
+#product_table .stop_tr, #product_table .stop_tr td{
+   border: 1px solid #EAEAEA;
+   border-left: none;
+   border-right: none;
+   font-family: 나눔바른펜;
+   text-decoration: line-through;
+   color: #EAEAEA;
+}
+
+#product_table thead {
+   background-color: #f0f0f5;
+}
+
+#product_table thead tr{
+   font-weight: bold;
+}
+
+.stopPro{
+   width : 60%;
+   height : 95%; 
+   
+   text-align : center;
+   
+   border : 1px solid #99b3e6; 
+   border-radius : 3px;
+   background-color: white; 
+   color : #99b3e6; 
+   
+   cursor: pointer;
+}
+
+.rePro{
+   width : 70%;
+   height : 95%; 
+   
+   text-align : center;
+   
+   border : 1px solid #99b3e6; 
+   border-radius : 3px;
+   background-color: white; 
+   color : #99b3e6; 
+   
+   cursor: pointer;
+}
+
+.delPro{
+   width : 70%;
+   height : 95%; 
+   
+   text-align : center;
+   
+   border : 1px solid #a6a6a6; 
+   border-radius : 3px;
+   background-color: white; 
+   color : #a6a6a6; 
+   
+   cursor: pointer;
+}
+
+.stopPro:hover {
+   background-color: #99b3e6; 
+   color : white;
+}
+
+.delPro:hover {
+   background-color: #a6a6a6; 
+   color : white;
+}
+
+.rePro:hover {
+   background-color: #99b3e6; 
+   color : white;
+}
+
+/*~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+#backPro{
+   float: left;
+   display: inline-block;
+   width : 50px;
+   height : 25px; 
+   
+   margin-top: 2%;
+   
+   border : 1px solid #a6a6a6; 
+   border-radius : 6px;
+   background-color: white; 
+   color : #a6a6a6; 
+   
+   cursor: pointer;
+}
+
+#backPro:hover {
+   background-color: #a6a6a6; 
+   color : white; 
+}
+
+#infoBox{
+   float: left; 
+   width: 90%;
+   border: none;
+   
+   margin-top: 2%;
+   margin-left : 6%;
+   
+   font-family: 나눔바른펜;
+}
+
+.inputNewInfo{
+   float : left;
+   width: 85%;
+   height: 30px;
+   line-height : 30px;
+   
+   border-radius: 6px;
+   
+   margin : auto;
+   margin-bottom: 2%;
+
+}
+
+.fileDrop{
+   float : left;
+   width : 70%;
+   height: 100px;
+   line-height : 30px;
+   
+   border-radius: 6px;
+   border : 1px solid #f0f0f5;
+   
+   margin : auto;
+   margin-top: 1%;
+   margin-left : 11.2%;
+
+}
+
+#addNewPro{
+   float : right;
+   width : 150px;
+   height : 45px; 
+   
+   margin-top: 10%;
+   margin-right : 5%;
+   
+   border : 1px solid #F15F5F; 
+   border-radius : 6px;
+   background-color: #F15F5F; 
+   color : white; 
+   
+   cursor: pointer;
+}
+
+#combo, #combo option {
+   width: 25%;
+   height: 90%;
+   
+   border: none;
+   border: 1px solid #f0f0f5;
+   border-radius: 6px;
+   
+   margin-left: 4%;
+}

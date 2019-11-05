@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+/* 페이지 소개 영역 */
+#intro {
+	margin-top: 40px;
+	margin-bottom: 50px;
+	text-align: center;
+}
+/* ----------------------------------------------------------------------------------------- */
+/* 검색 영역 */
+#search {
+	width: 1000px;
+	height: 50px;
+	margin: auto;
+	padding: 10px 0px;
+	text-align: center;
+	margin-top: 40px;
+	background-color: #323232;
+}
+
+/* 자주 묻는 질문, 공지사항 */
+#qna, #notice {
+	margin-left: 10px;
+	display: block;
+	float: left;
+	background-color: #323232;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px;
+	margin-left: 30px;
+	cursor: pointer;
+}
+
+#qna:hover, #notice:hover{
+	text-decoration: none;
+	color: #F15F5F;
+}
+
+
+.search{
+	display: block;
+	float: right;
+}
+
+/* 검색 텍스트 필드 */
+#data {
+	width: 250px;
+	height: 28px;
+	font-size: 13px;
+	position: relative;
+	top: 8px;
+	
+}
+
+/* 검색  버튼 */
+#btn {
+	display: block;
+	float: right;
+	width: 50px;
+	background-color: #323232;
+	border: none;
+	color: white;
+	text-align: center;
+	text-decoration: none;
+	font-size: 15px;
+	cursor: pointer;
+	height: 50px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 10px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+/* 검색 메뉴 */
+#selectMenu {
+	width: 1000px;
+	height: 50px;
+	margin: auto;
+	padding: 10px 0px;
+	text-align: center;
+	background-color: white;
+}
+
+/* 메뉴 좌측 이동, 스타일 */
+#whole, 
+#delivery, 
+#order, 
+#cancle, 
+#other {
+	margin-left: 10px;
+	display: block;
+	float: left;
+	width: 100px;
+	background-color: white;
+	border: none;
+	color: black;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px;
+	cursor: pointer;
+}
+
+/* 메뉴 마우스 이벤트 */
+#whole:hover, 
+#delivery:hover, 
+#order:hover, 
+#cancle:hover, 
+#other:hover{
+	text-decoration: none;
+	color: #F15F5F;
+}
+
+#btnWrite:hover{
+	text-decoration: none;
+	color: #00D8FF;
+}
+
+
+
+/* 글쓰기 버튼 우측 이동, 스타일 */
+#btnWrite {
+	margin-left: 10px;
+	display: block;
+	float: right;
+	background-color: white;
+	width: 150px;
+	border: 1px solid black;
+	background-color: white;
+	color: black;
+	padding: 5px 20px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 15px;
+	margin-top: 8px;
+	cursor: pointer;
+}
+
+/* 수평선 */
+hr {
+	width: 1000px;
+	margin: auto;
+	color: #D5D5D5;
+	margin-bottom: 40px;
+}
+/* ----------------------------------------------------------------------------------------- */
+
+/* 테이블 list 전체 */
+#bodywrap {
+	margin-top: 100px;
+	margin: auto;
+	width: 1000px;
+}
+
+/* 테이블 */
+#wrap, #wrap tr, #wrap tr td {
+	margin: auto;
+	border: 1px solid #D5D5D5;
+	border-collapse: collapse;
+	border-left: none;
+	border-right: none;
+	text-align: center;
+	height: 50px;
+	font-size: 13px;
+	font-weight: 550;
+}
+
+/* 맨 윗줄 굵게~ */
+#wrap, #wrap tr:nth-of-type(1){
+	border-top: 2px solid #747474;
+}
+
+/* 테이블 제목 스타일 설정 */
+#wrap tr:nth-of-type(1){
+	background-color: #EAEAEA;
+	font-weight: 900;
+	color: #5D5D5D;
+	border-bottom: 1px solid #747474;
+}
+/* 맨 위에서 두번째 줄 굵게~ */
+#wrap tr:nth-of-type(2){
+	border-top: 1px solid #747474;
+}
+
+/* 제목 칸 스타일 */
+#wrap tr td:nth-of-type(2){
+	text-align: left;	
+	text-decoration: none;
+}
+
+/* 제목 글 스타일 */
+#wrap tr td:nth-of-type(2) a{
+	text-decoration: none;
+	color: #F15F5F;
+}
+/* 제목 글 마우스 이벤트 */
+#wrap tr td:nth-of-type(2) a:hover{
+	color: #CC3D3D;
+	text-decoration: underline;
+}
+
+/* 답변 이미지 위치 수정 */
+#board_answer{
+	position: relative;
+	top: 3px;
+}
+/* ----------------------------------------------------------------------------------------- */
+
+/* 페이지 영역 */
+.pagelist {
+	margin-top: 40px;
+	margin-bottom: 40px;
+	text-align: center;
+}
+
+/* 페이지 번호 */
+.pagelist a {
+	text-decoration: none;
+	text-align: center;
+	margin: auto;
+	border: 1px solid #F15F5F;
+	padding: 3px 10px; /* top-bottom left-right */
+	color: #F15F5F;
+	font-weight: bold;
+}
+
+/* 페이지 번호 마우스 이벤트 */
+.pagelist a:hover, .pagelist .pagecolor {
+	text-decoration: none;
+	background-color: #F15F5F;
+	color: white;
+}

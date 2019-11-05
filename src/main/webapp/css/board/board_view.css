@@ -1,0 +1,241 @@
+@charset "UTF-8";
+
+/* 문의 내역 */
+#all {
+   width: 1000px;
+   margin: auto;
+}
+
+#body {
+   width: 100%;
+   height: 100%;
+}
+
+.viewintro {
+   width: 1000px;
+   margin: auto;
+   margin-top: 50px;
+}
+
+hr:nth-of-type(1) {
+   width: 1000px;
+   margin: auto;
+   border: 0;
+   height: 2px;
+   background: #323232;
+   margin-top: 15px;
+   margin-bottom: 40px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+/* 전체 테이블 설정 */
+#table {
+   width: 1000px;
+   margin: auto;
+   margin-top: 30px;
+   border-collapse: collapse;
+}
+
+#table tr, #table tr td {
+   border: 1px solid #D5D5D5;
+   border-collapse: collapse;
+}
+
+/* 배송 꾸미기.. */
+.category {
+   display: table;
+   width: 100px;
+   height: 30px;
+   background-color: #323232;
+   color: white;
+   text-align: center;
+   float: left;
+}
+
+/* 배송 수직 정렬 */
+.pcategory {
+   display: table-cell;
+   vertical-align: middle;
+   height: 50px;
+}
+
+/* 선 없애기~ */
+#table tr:nth-of-type(1), #table tr:nth-of-type(2), #table tr:nth-of-type(1) td,
+   #table tr:nth-of-type(2) td {
+   text-align: center;
+   border: none;
+}
+
+#table tr:nth-of-type(3) td:nth-of-type(1) {
+   text-align: center;
+   border-right: none;
+}
+
+#table tr:nth-of-type(3) td:nth-of-type(2) {
+   border-left: none;
+}
+
+#table tr:nth-of-type(1) {
+   background-color: #D5D5D5;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+/* 버튼 영역 */
+#multibutton {
+   margin-top: 20px;
+   margin-bottom: 20px;
+   float: right;
+}
+
+/* 버튼 스타일 */
+#list, #replay, #update, #delete, #delete2 {
+   margin-left: 10px;
+   display: block;
+   float: left;
+   background-color: #747474;
+   border: none;
+   color: #fff;
+   padding: 15px 0;
+   text-align: center;
+   text-decoration: none;
+   display: inline-block;
+   font-size: 15px;
+   cursor: pointer;
+   width: 100px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+hr:nth-of-type(2) {
+   width: 1000px;
+   margin: auto;
+   border: 0;
+   height: 2px;
+   background: #D5D5D5;
+   margin-top: 15px;
+   margin-bottom: 40px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+/* 댓글 수정 모달 */
+.modifyShow {
+   display: block;
+   position: absolute;
+   left: 40%;
+   bottom: 30%;
+   width: 400px;
+   height: 205px;
+   z-index: 1;
+   border: 1px solid black;
+   background-color: white;
+   text-align: center;
+}
+
+.modifyHide {
+   visibility: hidden;
+}
+
+/* 댓글 수정시 모달 내 버튼 스타일 */
+#btnModify, #btnClose {
+   background-color: white;
+   border: 1px solid #747474;
+   border-radius: 10px;
+   color: #747474;
+   padding: 10px 0;
+   text-align: center;
+   text-decoration: none;
+   font-size: 12px;
+   cursor: pointer;
+   width: 70px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+/* 수정 모달 창 내 텍스트 area 창 크기 수정 */
+#updateReplyText{
+   width: 95%;
+   height: 70%;
+}
+
+/* 댓글 영역 스타일 지정 */
+.timeline {
+   width: 1000px;
+   margin-bottom: 50px;
+}
+
+/* 댓글 텍스트 창 크기 조절 */
+#newReplyText {
+   width: 1000px;
+   height: 100px;
+   border: 1px solid #BDBDBD;
+   margin-bottom: 10px;
+}
+
+/* 댓글 쓰기 버튼 */
+#replyAddBtn {
+   margin-left: 50px;
+   float: right;
+   background-color: #F15F5F;
+   color: #fff;
+   border: none;
+   text-align: center;
+   text-decoration: none;
+   font-size: 20px;
+   cursor: pointer;
+   width: 100px;
+   height: 50px;
+   margin-bottom: 50px;
+}
+
+/* 댓글 작성 칸 스타일 지정 */
+.time_sub {
+   border: 2px solid #BDBDBD;
+   border-radius: 5px;
+   clear: both;
+   height: 110px;
+   margin-bottom: 10px;
+}
+
+.time_sub:nth-of-type(2) {
+   border: 2px solid #BDBDBD;
+   border-radius: 5px;
+   margin-top: 70px;
+   margin-bottom: 10px;
+   height: 110px;
+}
+
+/* 댓글 작성자 */
+.writer11 {
+   color: #747474;
+   margin-top: 10px;
+   margin-left: 10px; font-weight : bold;
+   font-size: 10px;
+   float: inherit;
+   font-weight: bold;
+}
+/* 댓글 내용  */
+.content11 {
+   margin-top: 5px;
+   margin-bottom: 5px;
+   margin-left: 10px;
+   font-weight: bold;
+   font-size: 14px;
+   float: inherit;
+}
+
+/* 수정, 삭제 버튼 스타일 */
+.deletebutton, .updatebutton {
+   background-color: white;
+   border: 1px solid #747474;
+   border-radius: 10px;
+   color: #747474;
+   padding: 10px 0;
+   text-align: center;
+   text-decoration: none;
+   font-size: 12px;
+   cursor: pointer;
+   width: 70px;
+   margin-top: 10px;
+   margin-bottom: 10px;
+   margin-right: 10px;
+   float: right;
+}

@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="manager">
+   <!-- 배송 리스트 -->
+   <!-- 배송 리스트 -->
+   <!-- 배송 리스트 -->
+   <resultMap type="dto.PurchaseDTO" id="shop_list" autoMapping="true">
+      <association property="shop" javaType="dto.ShoppingDTO">
+         <result column="shop_num" property="shop_num" />
+         <result column="shop_name" property="shop_name" />
+         <result column="shop_code" property="shop_code" />
+         <result column="shop_price" property="shop_price" />
+         <result column="shop_regdate" property="shop_regdate" />
+         <result column="shop_sellcnt" property="shop_sellcnt" />
+         <result column="shop_stock" property="shop_stock" />
+         <result column="shop_imgpath" property="shop_imgpath" />
+         <result column="shop_starcnt" property="shop_starcnt" />
+      </association>
+   </resultMap>
+
+   <!-- 배송 중 리스트 출력 -->
+   <select id="purchase_list" resultMap="shop_list">
+      select p.*, s.*
+      from purchase p, shopping s
+      where p.shop_num = s.shop_num(+)
+      and (purchase_condition = 0 or purchase_condition = 1 or purchase_condition = 2)
+      order by p.purchase_num desc
+   </select>
+
+   <!-- 배송 완료 리스트 출력 -->
+   <select id="complete_list" resultMap="shop_list">
+      select p.*, s.*
+      from purchase p, shopping s
+      where p.shop_num = s.shop_num(+)
+      and purchase_condition = 3
+      order by p.purchase_num desc
+   </select>
+
+   <!-- 배송 상태 수정 -->
+   <update id="purchase_update" parameterType="dto.PurchaseDTO">
+      update purchase
+      set purchase_condition = #{purchase_condition}
+      where purchase_num = #{purchase_num}
+   </update>
+
+   <!-- 재고 출력 -->
+   <select id="stock_list" resultType="dto.ShoppingDTO">
+      select * 
+      from shopping
+      order by shop_num
+   </select>
+   
+   <!-- 입고 -->
+   <update id="stock_update" parameterType="dto.ShoppingDTO">
+      update shopping
+      set shop_stock = shop_stock + #{shop_stock}
+      where shop_num = #{shop_num}
+   </update>
+
+
+   <!-- 그래프 -->
+   <!-- 그래프 -->
+   <!-- 그래프 -->
+   <select id="month1" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-01-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-02-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month2" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-02-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-03-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month3" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-03-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-04-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month4" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-04-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-05-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month5" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-05-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-06-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month6" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-06-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-07-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month7" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-07-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-08-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month8" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-08-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-09-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month9" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-09-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-10-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month10" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-10-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-11-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month11" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-11-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2019-12-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   <select id="month12" resultType="int">
+      <![CDATA[
+      SELECT count(*)
+      FROM purchase
+      WHERE purchase_regdate >= TO_DATE('2019-12-01','YYYY-MM-DD')
+      AND purchase_regdate < TO_DATE('2020-01-01','YYYY-MM-DD')+1
+      ]]>
+   </select>
+   
+   
+   
+   <!-- 상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리 -->
+   <!-- 상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리상품관리 -->
+   
+   <!-- 상품 현황 전체 가지고 올 쿼리 -->
+   <select id="shop_info_all" resultType="dto.Shopping_InfoDTO">
+      select * from shopping_info order by shopInfo_num
+   </select>
+   
+   <!-- 상품 판매 중지 -->
+   <!-- 상품 판매 중지 -->
+   <!-- 상품 판매 중지 -->
+   <!-- 임시 저장 테이블에 저장할 쿼리 -->
+   <insert id="pshop_temp_in" parameterType="int">
+      insert into shopping_temp 
+      select * from shopping where shop_num = #{shop_num} 
+   </insert>
+   
+   <!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 -->
+   <!-- 해당 상품에 댓글에 대한 멀티 파일 삭제 -->
+   <delete id="pshop_file_del" parameterType="int">
+      delete from shopping_file
+      where shop_num = #{shop_num}
+   </delete>
+   
+   <!-- 해당 상품에 댓글 삭제 -->
+   <delete id="pshop_reply_del" parameterType="int">
+      delete from shopping_reply
+      where shop_num = #{shop_num}
+   </delete>
+   
+   <!-- 해당 상품 삭제 -->
+   <delete id="pshop_del" parameterType="int">
+      delete from shopping
+      where shop_num = #{shop_num}
+   </delete>
+   <!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 --><!-- 삭제 -->
+   
+   <!-- 해당 상품의 상태 판매 중지로 변경 -->
+   <update id="shop_info_stop" parameterType="int">
+      update shopping_info
+      set shopInfo_chk = 0
+      where SHOPINFO_NUM = #{shop_num}
+   </update>
+   
+   
+   <!-- 상품 재판매 -->
+   <!-- 상품 재판매 -->
+   <!-- 상품 재판매 -->
+   <!-- 해당 상품 복귀 -->
+   <insert id="pshop_rein" parameterType="int">
+      insert into shopping 
+      select * from shopping_temp where shop_num = #{shop_num}
+   </insert>
+   
+   <!-- 해당 상품 임시 테이블에서 삭제 -->
+   <delete id="pshop_temp_del" parameterType="int">
+      delete from shopping_temp where shop_num = #{shop_num}
+   </delete>
+   
+   <!-- 해당 상품의 상태 판매중으로 변경 -->
+   <update id="shop_info_sale" parameterType="int">
+      update shopping_info
+      set shopInfo_chk = 1
+      where SHOPINFO_NUM = #{shop_num}
+   </update>
+   
+   
+   <!-- 상품삭제 -->
+   <!-- 상품삭제 -->
+   <!-- 상품삭제 -->
+   <!-- 위에서 했던 삭제과정에 이 과정 추가 -->
+   <delete id="shop_info_del" parameterType="int">
+      delete from shopping_info
+      where shopInfo_num = #{shop_num}
+   </delete>
+   
+   
+   <!-- 상품추가 -->
+   <!-- 상품추가 -->
+   <!-- 상품추가 -->
+   <!-- 쇼핑 테이블에 추가 -->
+   <insert id="shop_new" parameterType="dto.ShoppingDTO">
+      insert into shopping
+      values (shop_num_seq.nextval, #{shop_name,jdbcType=VARCHAR}, #{shop_code,jdbcType=VARCHAR}, #{shop_price}, sysdate, 0, #{shop_stock}, #{shop_imgpath,jdbcType=VARCHAR}, 0)
+   </insert>
+   
+   <!-- 방금 추가된 쇼팅 테이블의 상품번호를 검색 -->
+   <select id="shop_newNum" resultType="int">
+      select max(shop_num) from shopping
+   </select>
+   
+   <!-- 쇼핑 정보 테이블에 추가 -->
+   <insert id="shop_info_new" parameterType="dto.Shopping_InfoDTO">
+      insert into shopping_info
+      values(#{shopInfo_num}, #{shopInfo_name,jdbcType=VARCHAR}, #{shopInfo_code,jdbcType=VARCHAR}, #{shopInfo_price}, 0, 1)
+   </insert>
+   
+</mapper>

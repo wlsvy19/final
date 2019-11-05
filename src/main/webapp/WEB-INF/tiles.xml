@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+
+
+<!-- tiles는 뷰(회면에 보여지는것)에 대한 정보 -->
+<tiles-definitions>
+
+	<!-- 컨트롤러쪽에서 반환되는 MainIndex에 대한 설정 -->
+	<definition name="mainIndex" template="/WEB-INF/view/main/template/layout.jsp">
+		<!-- layout.jsp에 들어갈 페이지들을 설정 -->
+		<!-- put-attribute는 layout.jsp에 어디에 들어가야 하는지를 설정 -->
+		<put-attribute name="header" value="/WEB-INF/view/main/template/header.jsp" />
+		<put-attribute name="body" value="/WEB-INF/view/main/mainBody.jsp" />
+		<put-attribute name="footer" value="/WEB-INF/view/main/template/footer.jsp" />
+		<put-attribute name="chat" value="/WEB-INF/view/main/template/qnaChatting.jsp" />
+	</definition>
+
+	<!-- 메인메인 -->
+	<definition name="main" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/main/mainBody.jsp" />
+	</definition>
+
+	<!-- 서비스 이용약관 -->
+	<definition name="footerService" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/main/footerService.jsp" />
+	</definition>
+
+	<!-- 개인정보취급방침 -->
+	<definition name="footerPolicy" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/main/footerpolicy.jsp" />
+	</definition>
+
+	<!-- 서비스 이용안내 -->
+	<definition name="pageInfo" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/main/pageInfo.jsp" />
+	</definition>
+
+	<!-- ==================================================================================== -->
+
+	<!-- 컨트롤러쪽에서 반환되는 discStart에 대한 설정 -->
+	<!-- 앞에 있는 layout.jsp를 그대로 사용하고 다르게 설정할 부분만 재정의할 것 -->
+	<!-- 이 경우 template을 지정해주는 것이 아니라 extends를 사용 -->
+	<definition name="discStart" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/disc/discstart.jsp" />
+	</definition>
+
+	<!-- 컨트롤러쪽에서 반환되는 discTest에 대한 설정 -->
+	<definition name="discTest" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/disc/disctest.jsp" />
+	</definition>
+
+	<!-- 컨트롤러쪽에서 반환되는 discEnd에 대한 설정 -->
+	<definition name="discEnd" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/disc/discend.jsp" />
+	</definition>
+
+	<!-- ==================================================================================== -->
+
+	<!-- 컨트롤러쪽에서 반환되는 menu1에 대한 설정 -->
+	<definition name="shoppingMain" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/shopping/shoppingMain.jsp" />
+	</definition>
+
+	<definition name="shoppingView" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/shopping/shoppingView.jsp" />
+	</definition>
+
+	<definition name="shoppingCart" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/shopping/shoppingCart.jsp" />
+	</definition>
+
+
+	<!-- 형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철 -->
+	<!-- 형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철 -->
+	<!-- 게시글 목록 -->
+	<definition name="list" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/board_list.jsp" />
+	</definition>
+
+	<!-- 게시글 작성 -->
+	<definition name="write" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/board_write.jsp" />
+	</definition>
+
+	<!-- 게시글 수정 -->
+	<definition name="update" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/board_update.jsp" />
+	</definition>
+
+	<!-- 게시글 조회 -->
+	<definition name="view" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/board_view.jsp" />
+	</definition>
+
+	<!-- 공지사항 목록 -->
+	<definition name="notice" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/notice_list.jsp" />
+	</definition>
+
+	<!-- 공지사항 작성 -->
+	<definition name="notice_write" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/notice_write.jsp" />
+	</definition>
+
+	<!-- 공지사항 수정 -->
+	<definition name="notice_update" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/notice_update.jsp" />
+	</definition>
+
+	<!-- 공지사항 조회 -->
+	<definition name="notice_view" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/board/notice_view.jsp" />
+	</definition>
+
+	<!-- 채팅 -->
+	<definition name="openchatting" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/chatting/first.jsp" />
+	</definition>
+
+	<!-- 형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철 -->
+	<!-- 형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철형철 -->
+
+
+	<!-- 진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표 -->
+	<!-- 진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표 -->
+	<!-- 회원가입 화면 -->
+	<definition name="memberjoinform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/memberjoinform.jsp" />
+	</definition>
+
+	<!-- 로그인 화면 -->
+	<definition name="memberloginform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/memberloginform.jsp" />
+	</definition>
+
+	<!-- 로그아웃 화면 -->
+	<definition name="memberlogoutform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/memberlogoutform.jsp" />
+	</definition>
+
+	<!-- 마이페이지 화면 -->
+	<definition name="mypageform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/mypageform.jsp" />
+	</definition>
+
+	<!-- 네이버 로그인시 마이페이지 화면 -->
+	<definition name="nmypageform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/nmypageform.jsp" />
+	</definition>
+
+	<!-- 카카오 로그인시 마이페이지 화면 -->
+	<definition name="kmypageform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/kmypageform.jsp" />
+	</definition>
+
+
+	<!-- 아이디찾기 화면 -->
+	<definition name="idsearchform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/idsearchform.jsp" />
+	</definition>
+
+	<!-- 아이디찾기 결과 화면 -->
+	<definition name="idsearchresult" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/idsearchresult.jsp" />
+	</definition>
+
+	<!-- 비번찾기 화면 -->
+	<definition name="pwsearchform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/pwsearchform.jsp" />
+	</definition>
+
+	<!-- 비번찾기 결과 화면 -->
+	<definition name="pwsearchresult" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/pwsearchresult.jsp" />
+	</definition>
+
+	<!-- 개인정보수정 화면 -->
+	<definition name="memberupdateform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/memberupdateform.jsp" />
+	</definition>
+
+	<!-- 회원탈퇴 화면 -->
+	<definition name="memberdeleteform" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/memberdeleteform.jsp" />
+	</definition>
+
+	<definition name="nanaInfo" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/main/nanaInfo.jsp" />
+	</definition>
+
+	<!-- 카카오페이 시작 -->
+	<definition name="kakaoPayReady" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/kakaoPayReady.jsp" />
+	</definition>
+
+	<definition name="kakaoPaySuccess" extends="mainIndex">
+		<put-attribute name="body"
+			value="/WEB-INF/view/member/kakaoPaySuccess.jsp" />
+	</definition>
+
+	<!-- 진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표 -->
+	<!-- 진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표진표 -->
+
+	<!-- 관리자 -->
+	<!-- 관리자 -->
+	<!-- 관리자 -->
+	<definition name="marketing" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/marketing.jsp" />
+	</definition>
+
+	<definition name="marketingComplete" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/marketingcomplete.jsp" />
+	</definition>
+
+	<definition name="stock" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/stock.jsp" />
+	</definition>
+
+	<definition name="product" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/product.jsp" />
+	</definition>
+
+	<definition name="productAdd" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/productAdd.jsp" />
+	</definition>
+	
+	<definition name = "chattingStart" extends="mainIndex">
+		<put-attribute name="body" value="/WEB-INF/view/manager/chatting.jsp"/>
+    </definition>
+
+</tiles-definitions>

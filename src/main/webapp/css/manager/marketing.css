@@ -1,0 +1,224 @@
+@charset "UTF-8";
+/* 전체 영역 설정 */
+
+html, body { 
+   width : 100%;
+   height:100%;
+   background-color: #1f1f2e;
+}
+
+
+#allarea {
+   width: 100%;
+   height : 100%;
+   margin: auto;
+}
+
+#allarea_left{
+   float: left;
+   width: 23%;
+   height: 100%;
+}
+
+#allarea_right{
+   float : right;
+   width: 77%;
+   height: 100%;
+   background-color: white;
+   padding-bottom: 10%;
+}
+
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+
+#menuarea{
+   text-align: center;
+   width: 90%;
+   height : 100%;
+}
+
+#manager_logo{
+   width: 67%;
+   height: 130px;
+   size: 100%;
+   float: left;
+   margin-left: 2%;
+   margin-top: 10%;
+   margin-bottom: 15%;
+}
+
+.managerImgBtn, .managerImgBtn2, .managerImgBtn3{
+   width: 50%;
+   height: 40px;
+   size: 100%;
+   float: left;
+   margin-left: 8%;
+   margin-bottom: 7%;
+}
+
+.managerImgBtn2{
+   width: 70%;
+}
+
+.managerImgBtn3{
+   width: 45%;
+}
+
+
+#menu{
+   width: 90%;
+   margin: auto;
+   text-align: right;
+   font-size: 30px;
+   margin-top: 3%;
+}
+
+hr:nth-of-type(1){
+   width: 90%;
+   height: 2px;
+   
+   margin:auto;
+   margin-top: 10px;
+   
+   background: black;
+   border: 0px;
+}
+
+
+/* 그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프 */
+/* 그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프그래프 */
+
+#chart_div{
+   float: left; 
+   width: 900px;
+   border: none;
+   
+   margin-bottom: 50px;
+   margin-top: 30px;
+   margin-left : 16%;
+   
+   text-align: center;
+}
+
+#chart_table{
+   width: 790px;
+   height: 490px;
+   
+   border-radius: 10px;
+   
+   margin: auto;
+   margin-top: 40px;
+   margin-bottom: 40px;
+   border-collapse: collapse;
+   background-color: #ffffe6;
+}
+
+#chart_table tr, #chart_table tr td {
+   height: 30px;
+   border: none;
+}
+
+
+
+/* 판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록 */
+/* 판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록판매목록 */
+/* 배송, 배송완료  영역*/
+.delivery{
+   width: 900px;
+   margin:auto;
+   clear: both;
+   font-family: 나눔바른펜;   
+}
+/* 배송, 배송완료 버튼 */
+.delivery span a, .delivery span{
+   margin-left: 20px;
+   margin-right: 20px;
+   color: #323232;
+   text-decoration: none;
+   font-weight: bold;
+}
+.delivery span a:hover{
+   margin-left: 20px;
+   margin-right: 20px;
+   color: #F15F5F;
+   text-decoration: none;
+   font-weight: bold;
+}
+
+/* 밑에 밑줄 */
+hr:nth-of-type(2){
+   width: 900px;
+   height: 1px;
+   
+   margin:auto;
+   margin-top: 10px;
+   margin-bottom: 30px;
+   
+   background: #323232;
+   border: 0px;
+}
+
+
+/* 판매목록 */
+/* 테이블 스타일 */
+#purchaselist{
+   margin-top: 10px;
+   margin:auto;
+   
+   width: 900px;
+   
+   border: 3px solid #D5D5D5;
+   border-collapse: collapse;
+}
+
+/* 테이블 높이, 글씨체 적용 */
+tr, td {
+   height: 30px;
+   font-family: 나눔바른펜;
+   /* border: 1px solid black; */
+}
+
+/* 테이블 테두리만 적용했는데 부분적으로 비어 있는 얘들만 따로 스타일 적용 */
+.sb{
+   border-right: 3px solid #D5D5D5;
+}
+
+/* 배송 버튼들.. */
+#buttonarea input {
+   height: 30px;
+   
+   background-color: white;
+   border: none;
+   border: 1px solid black;
+   border-radius: 5px;
+   
+   text-align: center;
+   text-decoration: none;
+   
+   color: black;
+   font-size: 15px;
+   font-family: 나눔바른펜;
+   cursor: pointer;
+   
+   padding-left: 10px;
+   padding-right: 10px;  
+}
+
+
+#buttonarea input:hover {
+   height: 30px;
+   
+   background-color: #F15F5F;
+   border: none;
+   
+   text-align: center;
+   text-decoration: none;
+   
+   color: white;
+   font-size: 15px;
+   font-family: 나눔바른펜;
+   cursor: pointer;
+   
+   padding-left: 10px;
+   padding-right: 10px;
+}

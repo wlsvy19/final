@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+/* 채팅 전체 영역 설정 */
+#chatarea{
+	width: 500px;
+	height : 600px;
+
+	margin: auto;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	
+	background-color: #B2CCFF;
+	border: 1px solid #BDBDBD;
+	/* 채팅 영역 하단에 고정하기 위해 */
+	position: relative;
+	font-family: 나눔바른펜;
+}
+
+/* 채팅 공지 영역 */
+#chatnotice{
+	width: 488px;
+	height: 40px;
+	border: 1px solid white;
+	border-radius: 3px;
+	background-color: white;
+	text-align: center;
+	padding-top: 15px;
+	opacity: 0.8;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	
+}
+
+/* 채팅 내용 영역 */
+#chatMessageArea{
+	width: 500px;
+	height : 435px;
+	overflow:scroll; 
+	overflow-x: hidden;
+}
+
+/* 채팅 입력 영역 */
+#inputarea{
+	/* 채팅 영역 하단에 고정하기 위해 */
+	position: absolute;
+	bottom: 0px;
+	
+	width: 500px;
+	height: 100px;
+	background-color: white;
+}
+
+/* 입력 내용 칸*/
+#message{
+	width: 400px;
+	height: 98px;
+	border: 0px;
+	margin-left: 5px;
+	outline: none;
+}
+
+/* 전송 버튼 영역 */
+#sendarea{
+	width: 95px;
+	height:100px;
+}
+
+/* 전송버튼 */
+#sendBtn{
+	border: none;
+	border-radius : 3px;
+	
+	background-color: #FFE400;
+	color: black;
+	
+	text-align: center;
+	
+	font-size: 15px;
+
+	cursor: pointer;
+	width: 60px;
+	height: 40px;
+	
+	margin-left : 8px;
+}
+
+

@@ -1,0 +1,105 @@
+@charset "UTF-8";
+
+/* 전체 영역 설정 */
+#userchatarea {
+	width: 320px;
+	height: 500px;
+	margin: auto;
+	border-radius: 20px;
+	background-color: #5CD1E5;
+	font-family: 나눔바른펜;
+	position: fixed;
+	bottom : 10px;
+	right: 10px;
+	z-index: 200;
+}
+
+/* ---------------------------------------------------------------------- */
+/* 테이블 헤더, 푸터 */
+.table_header{
+	width: 100%;
+	height: 50px;
+	margin: auto;
+	text-align: center;
+}
+
+.table_header b, #hidehide{
+	position: relative;
+	top: 14px;
+}
+
+/* x버튼 */
+.x_button{
+	border: none; 
+	background-color: #5CD1E5; 
+	color: white;
+	float: right;
+	position: relative;
+	top: 17px;
+	border-radius: 20px;
+	cursor: pointer;
+}
+/* ---------------------------------------------------------------------- */
+/* 테이블 영역 */
+#tablearea{
+	width: 320px;
+	height: 400px;
+	margin: auto;
+	/* border: 1px solid black; */
+	background-color: #FDFDFD;
+	text-align: center;
+	overflow:scroll;
+	overflow-x:hidden;
+}
+/* 테이블 스타일 지정 */
+#chat_list_table{
+	width:100%;
+	margin: auto;
+	text-align: center;
+	/* border: 1px solid black; */
+	border-collapse: collapse;	
+}
+#chat_list_table tr, #chat_list_table tr td{
+	/* border: 1px solid black; */
+	height: 20px;
+}
+
+/* 채팅내용영역 */
+.contentarea{
+	border: 1px solid #F6F6F6; 
+	border-radius: 5px; 
+	padding: 2px 2px 2px 2px; 
+	background-color: #F6F6F6;
+}
+/* ---------------------------------------------------------------------- */
+/* 입력 영역 */
+.table_header_child{
+	position: relative;
+	top: 7px;
+	height: 100%;
+}
+/* 입력 칸 */
+#chat_content{
+	width: 70%;
+	height: 60%;
+	border-radius: 20px;
+	border: none;
+	top: 10px;
+}
+
+/* 전송 버튼 */
+#chat_insert{
+	width: 15%;
+	height: 60%;
+	border-radius: 20px;
+	border: none;
+	background-color : #5CD1E5;
+	color: white;
+	font-weight: bold;
+	
+}
+
+/* 이름, 날짜 영역 */
+.user_send{
+	font-size: 10px;
+}

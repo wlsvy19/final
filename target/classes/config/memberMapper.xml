@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="member">
+
+	<!-- 회원가입 -->
+	<insert id="join" parameterType="dto.MemberDTO">
+		insert into member
+		values(
+		#{mem_id},
+		#{mem_pw},
+		#{mem_name},
+		#{mem_birth},
+		#{mem_email},
+		#{mem_phone},
+		#{mem_gender},
+		null,
+		#{mem_oaddress},
+		#{mem_address},
+		#{mem_detailaddress},
+		0
+		)
+	</insert>
+
+	<!-- 로그인 유효성 검사(id와 pw가 db에 있는지 체크 -->
+	<select id="logincheck" resultType="String">
+		select mem_name AS mem_name
+		from member
+		where mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
+
+	<!-- 회원정보 -->
+	<select id="viewmember" resultType="dto.MemberDTO">
+		select
+		mem_name AS mem_name,
+		mem_id AS mem_id,
+		mem_email AS mem_email,
+		mem_phone AS mem_phone,
+		mem_birth AS mem_birth,
+		mem_gender AS mem_gender,
+		mem_hobby AS
+		mem_hobby,
+		mem_oaddress AS mem_oaddress,
+		mem_address AS mem_address,
+		mem_detailaddress AS mem_detailaddress
+		from member
+		where
+		mem_id=#{mem_id} and mem_pw = #{mem_pw}
+	</select>
+
+	<!-- 아아디 찾기 -->
+	<select id="idsearch" parameterType="dto.MemberDTO" resultType="String">
+		select mem_id
+		from member
+		where mem_name = #{mem_name}
+		and
+		mem_email = #{mem_email}
+	</select>
+
+	<!-- 비밀번호 찾기 -->
+	<select id="pwsearch" parameterType="dto.MemberDTO" resultType="String">
+		select mem_pw
+		from member
+		where mem_id = #{mem_id}
+		and
+		mem_birth = #{mem_birth}
+	</select>
+
+	<!-- 개인정보 수정 -->
+	<update id="update" parameterType="dto.MemberDTO">
+		update member
+		set
+		mem_pw = #{mem_pw},
+		mem_name = #{mem_name},
+		mem_email = #{mem_email},
+		mem_phone = #{mem_phone},
+		mem_oaddress = #{mem_oaddress},
+		mem_address = #{mem_address},
+		mem_detailaddress =
+		#{mem_detailaddress}
+		where
+		mem_id = #{mem_id}
+	</update>
+
+	<!-- 아이디 중복체크 -->
+	<select id="idcheck" parameterType="String" resultType="Integer">
+		select
+		count(*) from member
+		where mem_id = #{mem_id}
+	</select>
+
+	<!-- 회원정보 탈퇴 처리 -->
+	<delete id="delete">
+		delete from member
+		where
+		mem_id = #{mem_id}
+	</delete>
+
+	<!-- 회원탈퇴를 위한 비밀번호 확인 -->
+	<select id="checkpw" resultType="int">
+		select count(*)
+		from member
+		where
+		mem_id = #{mem_id} and mem_pw = #{mem_pw}
+	</select>
+
+	<!-- 마이페이지 회원 아이디, 포인트 가져오기 -->
+	<select id="id_point" resultType="dto.MemberDTO" parameterType="String">
+		select *
+		from member
+		where mem_id = #{mem_id}
+	</select>
+
+	<!-- 내가 작성한 게시글 가져오기 -->
+	<select id="my_board" resultType="dto.BoardDTO" parameterType="String">
+		select *
+		from board
+		where board_writer = #{mem_id}
+	</select>
+
+
+	<!-- 구매 상품 가져오기 -->
+	<!-- 구매 상품 가져오기 -->
+	<!-- 구매 상품 가져오기 -->
+	<resultMap type="dto.PurchaseDTO" id="shop_list" autoMapping="true">
+		<association property="shop" javaType="dto.ShoppingDTO">
+			<result column="shop_num" property="shop_num" />
+			<result column="shop_name" property="shop_name" />
+			<result column="shop_code" property="shop_code" />
+			<result column="shop_price" property="shop_price" />
+			<result column="shop_regdate" property="shop_regdate" />
+			<result column="shop_sellcnt" property="shop_sellcnt" />
+			<result column="shop_stock" property="shop_stock" />
+			<result column="shop_imgpath" property="shop_imgpath" />
+			<result column="shop_starcnt" property="shop_starcnt" />
+		</association>
+	</resultMap>
+
+	<!-- 배송 중 리스트 출력 -->
+	<select id="member_purchase" resultMap="shop_list" parameterType="String">
+		select p.*, s.*
+		from purchase p, shopping s
+		where
+		p.shop_num = s.shop_num(+)
+		and mem_id = #{mem_id}
+		order by
+		p.purchase_num desc
+	</select>
+
+	<!-- 회원취미 입력 -->
+	<update id="hobbyInput" parameterType="dto.MemberDTO">
+		update member set
+		mem_hobby = #{mem_hobby} where mem_id = #{mem_id}
+	</update>
+
+	<!-- 관심 상품 가져오기 -->
+	<!-- 관심 상품 가져오기 -->
+	<!-- 관심 상품 가져오기 -->
+	<resultMap type="dto.Shopping_LikeDTO" id="shop_like" autoMapping="true">
+		<association property="likeList" javaType="dto.ShoppingDTO" autoMapping="false">
+			<result column="shop_num" property="shop_num" />
+			<result column="shop_name" property="shop_name" />
+			<result column="shop_code" property="shop_code" />
+			<result column="shop_price" property="shop_price" />
+			<result column="shop_regdate" property="shop_regdate" />
+			<result column="shop_sellcnt" property="shop_sellcnt" />
+			<result column="shop_stock" property="shop_stock" />
+			<result column="shop_imgpath" property="shop_imgpath" />
+			<result column="shop_starcnt" property="shop_starcnt" />
+		</association>
+	</resultMap>
+
+	<select id="member_like" resultMap="shop_like" parameterType="String">
+		select l.*, s.*
+		from shopping_like l, shopping s
+		where l.shop_num = s.shop_num(+)
+		and mem_id = #{mem_id}
+		order by l.shop_num desc
+	</select>
+	
+</mapper>

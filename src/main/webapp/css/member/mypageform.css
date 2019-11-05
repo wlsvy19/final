@@ -1,0 +1,170 @@
+@charset "UTF-8";
+
+/* 전체 영역 */
+#myall{
+   width: 1000px;
+   margin: auto;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   font-family: 나눔바른펜;
+}
+
+/* 마이페이지 영역 */
+.header{
+   width: 1000px;
+   margin: auto;
+   margin-bottom: 10px;
+   text-align: right;
+   font-size: 30px;
+   font-weight: bold;
+}
+
+/* 첫번째 hr */
+hr:nth-of-type(1) {
+   width: 1000px;
+   height: 2px;
+   margin: auto;
+   background: #D5D5D5; 
+   border: none;
+}
+
+/* =============================================================== */
+
+/* 테이블 스타일 */
+#mytable{
+   width: 1000px;
+   margin: auto;
+   margin-top: 30px;
+   margin-bottom: 30px;
+   border-collapse: collapse;
+}
+
+/* 행 간격 조절 */
+#mytable tr td{
+   width: 14.2%;
+   height: 50px;
+   text-align: center;
+   font-size: 20px;
+   font-weight: bold;
+}
+
+/* 테이블 가운데 선 긋기 */
+#mytable tr td:nth-of-type(2),
+#mytable tr td:nth-of-type(3),
+#mytable tr td:nth-of-type(4),
+#mytable tr td:nth-of-type(5),
+#mytable tr td:nth-of-type(6) {
+   border-left: 2px solid #D5D5D5;
+   border-right: 2px solid #D5D5D5;
+}
+
+hr:nth-of-type(2) {
+   width: 1000px;
+   height: 2px;
+   margin: auto;
+   margin-bottom: 20px;
+   background: #D5D5D5; 
+   border: none;
+}
+/* =============================================================== */
+
+/* 판매목록 */
+/* 테이블 스타일 */
+#purchaselist{
+   margin-top: 10px;
+   margin:auto;
+   
+   width: 1000px;
+   
+   border: 3px solid #D5D5D5;
+   border-collapse: collapse;
+}
+
+/* 테이블 높이, 글씨체 적용 */
+tr, td {
+   height: 30px;
+   font-family: 나눔바른펜;
+   /* border: 1px solid black; */
+}
+
+/* 테이블 테두리만 적용했는데 부분적으로 비어 있는 얘들만 따로 스타일 적용 */
+.sb{
+   border-right: 3px solid #D5D5D5;
+}
+
+/* 배송 버튼들.. */
+#buttonarea input {
+   width: 120px;
+   height: 30px;
+   
+   background-color: white;
+   border: none;
+   border: 1px solid black;
+   border-radius: 5px;
+   
+   text-align: center;
+   text-decoration: none;
+   
+   color: black;
+   font-size: 15px;
+   font-family: 나눔바른펜;
+   cursor: pointer;
+   
+   
+}
+#buttonarea input:hover {
+   width: 120px;
+   height: 30px;
+   
+   background-color: #F15F5F;
+   border: none;
+   
+   text-align: center;
+   text-decoration: none;
+   
+   color: white;
+   font-size: 15px;
+   font-family: 나눔바른펜;
+   cursor: pointer;
+}
+
+/* =============================================================== */
+/* 관심 상품 테이블 */
+#ajaxarea{
+   border-collapse: collapse;
+   margin: auto;
+   width: 500px;
+   text-align: center;
+}
+/* 관심 상품 열 */
+.likelist_tr{
+   margin-bottom: 10px;
+   border: 3px solid #D5D5D5;
+}
+
+/* 관심 상품 행 */
+.likelist{
+   border: none;
+   height: 100px;
+   font-size: 20px;
+   border: 3px solid #D5D5D5;
+}
+
+#title{
+   text-decoration: none;
+   color: black;
+}
+
+#title:hover{
+   color:  #d580ff;
+}
+
+.likelist:nth-of-type(1),
+.likelist:nth-of-type(2) {
+   
+}
+
+.likelist:nth-of-type(3),
+.likelist:nth-of-type(4) {
+   
+}

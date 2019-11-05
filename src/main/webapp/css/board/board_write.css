@@ -1,0 +1,124 @@
+@charset "UTF-8";
+
+/* 문의 작성하기 */
+.writeintro {
+	width: 1000px;
+	margin: auto;
+	margin-top: 50px;
+}
+
+hr {
+	width: 1000px;
+	margin: auto;
+	border: 0;
+	height: 2px;
+	background: #323232;
+	margin-top: 15px;
+	margin-bottom: 40px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+/* 전체 테이블 스타일 */
+table {
+	width: 1000px;
+	margin: auto;
+}
+
+/* 작성자, 제목, 내용, 첨부파일 글씨체 설정 */
+table tr td:nth-of-type(1) {
+	font-family: 'dotum';
+	color: #323232;
+}
+
+/* 작성자, 제목, 내용, 첨부파일 텍스트필드 크기 조절 */
+table tr td input, table tr td textarea {
+	width: 800px;
+}
+
+td {
+	height: 30px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+
+/* 버튼 위치 수정 */
+.button {
+	width: 1000px;
+	text-align: center;
+	margin: auto;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
+
+.button1 {
+	display: inline-block;
+}
+
+.button2 {
+	display: inline-block;
+}
+
+/* 리스트 버튼 스타일 */
+#btnList {
+	margin-left: 10px;
+	display: block;
+	float: left;
+	background-color: #747474;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px;
+	margin-left: 30px;
+	cursor: pointer;
+	width: 200px;
+}
+
+/* 저장 버튼 스타일 */
+#btnSave {
+	margin-left: 10px;
+	display: block;
+	float: left;
+	background-color: #323232;
+	border: none;
+	color: #fff;
+	padding: 15px 0;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 15px;
+	margin: 4px;
+	margin-left: 30px;
+	cursor: pointer;
+	width: 200px;
+}
+
+/* ----------------------------------------------------------------------------------------- */
+.fileDrop {
+	width: 800px;
+	height: 200px;
+	border: 1px solid #A6A6A6;
+	overflow: auto;
+	text-align: left;
+}
+
+input[type="checkbox"] {
+    margin: 3px 3px 3px 4px;
+}
+
+input[type="checkbox"] {
+    -webkit-appearance: checkbox;
+    box-sizing: border-box;
+}
+
+input[type="radio"], input[type="checkbox"] {
+    background-color: initial;
+    cursor: default;
+    margin: 3px 0.5ex;
+    padding: initial;
+    border: initial;
+}

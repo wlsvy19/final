@@ -1,0 +1,482 @@
+
+.map_wrap, .map_wrap * {
+   margin: 0;
+   padding: 0;
+   font-family: 'Malgun Gothic', dotum, '돋움', sans-serif;
+   font-size: 12px;
+}
+
+.map_wrap a, .map_wrap a:hover, .map_wrap a:active {
+   color: #000;
+   text-decoration: none;
+}
+
+.map_wrap {
+   position: relative;
+   width: 100%;
+   height: 250px;
+}
+
+#menu_wrap {
+   position: absolute;
+   top: 0;
+   left: 0;
+   bottom: 0;
+   width: 250px;
+   margin: 10px 0 30px 10px;
+   padding: 5px;
+   overflow-y: auto;
+   background: rgba(255, 255, 255, 0.7);
+   z-index: 1;
+   font-size: 12px;
+   border-radius: 10px;
+}
+
+.bg_white {
+   background: #fff;
+}
+
+#menu_wrap hr {
+   display: block;
+   height: 1px;
+   border: 0;
+   border-top: 2px solid #5F5F5F;
+   margin: 3px 0;
+}
+
+#menu_wrap .option {
+   text-align: center;
+}
+
+#menu_wrap .option p {
+   margin: 10px 0;
+}
+
+#menu_wrap .option button {
+   margin-left: 5px;
+}
+
+#placesList li {
+   list-style: none;
+}
+
+#placesList .item {
+   position: relative;
+   border-bottom: 1px solid #888;
+   overflow: hidden;
+   cursor: pointer;
+   min-height: 65px;
+}
+
+#placesList .item span {
+   display: block;
+   margin-top: 4px;
+}
+
+#placesList .item h5, #placesList .item .info {
+   text-overflow: ellipsis;
+   overflow: hidden;
+   white-space: nowrap;
+}
+
+#placesList .item .info {
+   padding: 10px 0 10px 55px;
+}
+
+#placesList .info .gray {
+   color: #8a8a8a;
+}
+
+#placesList .info .jibun {
+   padding-left: 26px;
+   background:
+      url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png)
+      no-repeat;
+}
+
+#placesList .info .tel {
+   color: #009900;
+}
+
+#placesList .item .markerbg {
+   float: left;
+   position: absolute;
+   width: 36px;
+   height: 37px;
+   margin: 10px 0 0 10px;
+   background:
+      url(http://i1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png)
+      no-repeat;
+}
+
+#placesList .item .marker_1 {
+   background-position: 0 -10px;
+}
+
+#placesList .item .marker_2 {
+   background-position: 0 -56px;
+}
+
+#placesList .item .marker_3 {
+   background-position: 0 -102px
+}
+
+#placesList .item .marker_4 {
+   background-position: 0 -148px;
+}
+
+#placesList .item .marker_5 {
+   background-position: 0 -194px;
+}
+
+#placesList .item .marker_6 {
+   background-position: 0 -240px;
+}
+
+#placesList .item .marker_7 {
+   background-position: 0 -286px;
+}
+
+#placesList .item .marker_8 {
+   background-position: 0 -332px;
+}
+
+#placesList .item .marker_9 {
+   background-position: 0 -378px;
+}
+
+#placesList .item .marker_10 {
+   background-position: 0 -423px;
+}
+
+#placesList .item .marker_11 {
+   background-position: 0 -470px;
+}
+
+#placesList .item .marker_12 {
+   background-position: 0 -516px;
+}
+
+#placesList .item .marker_13 {
+   background-position: 0 -562px;
+}
+
+#placesList .item .marker_14 {
+   background-position: 0 -608px;
+}
+
+#placesList .item .marker_15 {
+   background-position: 0 -654px;
+}
+
+#pagination {
+   margin: 10px auto;
+   text-align: center;
+}
+
+#pagination a {
+   display: inline-block;
+   margin-right: 10px;
+}
+
+#pagination .on {
+   font-weight: bold;
+   cursor: default;
+   color: #777;
+}
+
+/*  줌인 스카이 변환 css */
+html, body {
+   width: 100%;
+   height: 100%;
+   margin: 0;
+   padding: 0;
+}
+
+.radius_border {
+   border: 1px solid #919191;
+   border-radius: 5px;
+}
+
+.custom_typecontrol {
+   position: absolute;
+   top: 10px;
+   right: 10px;
+   overflow: hidden;
+   width: 130px;
+   height: 30px;
+   margin: 0;
+   padding: 0;
+   z-index: 1;
+   font-size: 12px;
+   font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
+}
+
+.custom_typecontrol span {
+   display: block;
+   width: 65px;
+   height: 30px;
+   float: left;
+   text-align: center;
+   line-height: 30px;
+   cursor: pointer;
+}
+
+.custom_typecontrol .btn {
+   background: #fff;
+   background: linear-gradient(#fff, #e6e6e6);
+}
+
+.custom_typecontrol .btn:hover {
+   background: #f5f5f5;
+   background: linear-gradient(#f5f5f5, #e3e3e3);
+}
+
+.custom_typecontrol .btn:active {
+   background: #e6e6e6;
+   background: linear-gradient(#e6e6e6, #fff);
+}
+
+.custom_typecontrol .selected_btn {
+   color: #fff;
+   background: #425470;
+   background: linear-gradient(#425470, #5b6d8a);
+}
+
+.custom_typecontrol .selected_btn:hover {
+   color: #fff;
+}
+
+.custom_zoomcontrol {
+   position: absolute;
+   top: 50px;
+   right: 10px;
+   width: 36px;
+   height: 80px;
+   overflow: hidden;
+   z-index: 1;
+   background-color: #f5f5f5;
+}
+
+.custom_zoomcontrol span {
+   display: block;
+   width: 36px;
+   height: 40px;
+   text-align: center;
+   cursor: pointer;
+}
+
+.custom_zoomcontrol span img {
+   width: 15px;
+   height: 15px;
+   padding: 12px 0;
+   border: none;
+}
+
+.custom_zoomcontrol span:first-child {
+   border-bottom: 1px solid #bfbfbf;
+}
+
+/*소개 css */
+
+
+.Introduce-area1  {
+
+   position : relative;
+   text-align:center;
+   padding : 40px 0 150px;
+   background: #FFF5F4 url('../images/Introduce-area1-image01.png') center 6px no-repeat;
+   background-size: 900px;
+   margin-bottom: 100px;
+   height: 208px;
+}
+
+.Introduce-area3{
+    background: #FFF5F4;
+    height: 760px;
+    padding-top: 30px;
+    padding-bottom: 50px;
+}
+
+.divblock{
+   margin: auto;
+   margin-top: 35px;
+   margin-bottom: 80px;
+}
+
+.block {
+   width:100px;
+   height: 2px;
+   background-color: #f22d8a;
+   border: 0;
+   margin:auto;
+}
+
+.Introduc-area2-tit{
+   font-size: xx-large;
+   font-weight: bolder;
+   text-align: center;
+   margin-bottom: 35px;
+}
+
+.Introduc-area2-subtit{
+   text-align: center;
+   margin-bottom: 35px;
+}
+
+ul{
+   list-style: none;
+   margin-bottom: 100px;
+}
+
+.Introduce-area2-img3{
+   background: url("../images/Introduce-area2-image10.png") center no-repeat ;
+   background-size: 570px;
+   height: 410px;
+   margin-right: 69px;
+   margin-top: 75px;
+}
+
+.Introduce-area2-img4{
+   background: url("../images/Introduce-area2-image11.png") center no-repeat;
+   height: 415px;
+   background-size: cover;
+}
+
+.Introduce-area2-img5{
+   background: url("../images/Introduce-area2-image12.png") center no-repeat;
+   height: 350px;
+   background-size: cover;
+}
+.Introduce-area2-img6{
+   background: url("../images/Introduce-area2-image13.png") center no-repeat;
+   height: 550px;
+   background-size: cover;
+}
+
+.Introduc-area2-img-area-tit1{
+   font-size: xx-large;
+   text-align:center;
+   margin-bottom: 35px;
+}
+
+.Introduc-area2-img-area-subtit1{
+   text-align: center;
+   margin-bottom: 25px;
+}
+
+.Introduc-area2-img1{
+   background:url('../images/Introduce-area1-image02.jpg') center no-repeat ;
+   background-size: auto;
+   height:220px;
+   margin: auto;
+   margin-bottom: 75px;
+}
+.Introduc-area2-img-area-tit2{
+   font-size: xx-large;
+   text-align:center;
+   margin-bottom: 35px;
+}
+
+.Introduc-area2-img-area-subtit2{
+   text-align: center;
+   margin-bottom: 25px;
+}
+
+.Introduc-area2-img2{
+   background: url('../images/Introduce-area2-image08.JPG') center no-repeat;
+   height : 11cm;
+   background-size: auto;
+   margin: auto;
+   margin-bottom: 35px;
+}
+.test1 hr {
+   background: url('../images/Introduce-area2-image04.png') center top no-repeat;
+   height: 125px;
+   border: none;
+   margin-top: 75px;
+}
+.test2 hr {
+   background: url('../images/Introduce-area2-image03.png') center top no-repeat;
+   height: 125px;
+   border: none;
+   border-right: solid;
+   border-right-color: #FFF5F4;
+   border-right-width: 23px;
+}
+.test3 hr {
+   background: url('../images/Introduce-area2-image05.png') center top no-repeat;
+   height: 125px;
+   border: none;
+   border-right: solid;
+   border-right-color: #FFF5F4;
+   border-right-width: 23px;
+}
+.bottom-area{
+   padding: 200px 0 ;
+}
+
+.block1 hr{
+   display: block;
+   width: 30px;
+   height: 1px;
+   margin: 20px auto 0 ;
+   font-size: 0;
+   background: #d8d8d8;
+}
+.bottom-area-tit{
+   font-size: x-large;
+   font-weight: bolder;
+   text-align: center;
+}
+.test1 
+{
+   margin-bottom: 35px;
+}
+.test2 
+{
+   margin-bottom: 35px;
+}
+.test3 
+{
+   margin-bottom: 35px;
+}
+.bottom-area-cont{
+   text-align: center;
+}
+.map_wrap-cont1{
+   margin-top: 9px;
+   margin-bottom: 35px;
+   text-align: center;
+   font-size: medium;
+}
+/* 나나랜드 카운드 보드 */
+
+.container-relative{
+   display: inline-block;
+    text-align: center;
+    background: #f3f3f3;
+    width: 100%;
+    position: relative;
+    height: 100%;
+    margin: 100px 0;
+}
+
+.row{
+   display: inline-block;
+   width: max-content;
+   padding: 100px 0;
+}
+.row-tit{
+   margin-bottom: 35px;
+}
+.col{
+   /* content: "\f0f2"; */
+   float: left;
+   padding: 0 25px;
+}
+.count-numbers {
+   font-size: -webkit-xxx-large; 
+   font-weight: bolder;
+   
+}

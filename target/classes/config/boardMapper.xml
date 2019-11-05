@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="board">
+	<!-- Q&A 레코드 수 출력 -->
+	<select id="count" resultType="int">
+		select count(*) from board
+	</select>
+
+	<!-- Q&A list 출력 -->
+	<select id="list" parameterType="dto.PageDTO" resultType="dto.BoardDTO">
+      <![CDATA[
+      select b.* 
+      from (select rownum as rm, a.* 
+      		from (select * 
+      				from board 
+      				order by board_ref desc, board_num) a)b
+      where b.rm>=#{startRow} and b.rm<=#{endRow}
+      ]]>
+	</select>
+
+	<!-- Q&A 조회 수 증가 -->
+	<update id="readCount" parameterType="int">
+		update board
+		set board_count =
+		board_count + 1
+		where board_num = #{board_num}
+	</update>
+
+	<!-- num 값에 해당하는 Q&A 보여주기 -->
+	<select id="content" parameterType="int" resultType="dto.BoardDTO">
+		select * from board
+		where board_num = #{board_num}
+	</select>
+
+	<!-- 답변글 쓰기전 reStep 해줘야한다.=>> 출력순서 정하기 -->
+	<!-- 답변글일 경우에 가장 최근글이 먼저 출력되어야 하기 때문에 -->
+	<update id="reStepCount" parameterType="dto.BoardDTO">
+      <![CDATA[
+      update board set board_re_step = board_re_step + 1
+      where board_ref = #{board_ref} and board_re_step > #{board_re_step}
+      ]]>
+	</update>
+
+	<!-- Q&A, Q&A 답변글 쓰기 -->
+	<insert id="save" parameterType="dto.BoardDTO">
+		insert into
+		board(board_num, board_writer, board_title, board_regdate, board_count,
+		board_ref, board_re_step, board_re_level, board_content, board_file, board_type)
+		values(board_num_seq.nextval, #{board_writer}, #{board_title}, sysdate, 0,
+		<choose>
+			<!-- 제목글이면 -->
+			<when test="board_ref==0">
+				board_num_seq.nextval
+			</when>
+			<otherwise>
+				#{board_ref}
+			</otherwise>
+		</choose>
+		, #{board_re_step}, #{board_re_level}, #{board_content},
+		#{board_file,jdbcType=VARCHAR}, #{board_type})
+	</insert>
+
+	<!-- Q&A 업데이트 -->
+	<update id="upt" parameterType="dto.BoardDTO">
+		update board
+		set board_title = #{board_title}, board_content = #{board_content}, board_type = #{board_type}
+		<!-- 여기 if 문안에 있는 upload 는 새로 들어오는 업로드를 얘기하는거다 기존꺼가 아니라 -->
+		<if test="board_file!=null">
+			,board_file = #{board_file}
+		</if>
+		where board_num = #{board_num}
+	</update>
+
+	<!-- 수정,삭제 위한 -->
+	<select id="uploadFile" parameterType="int" resultType="String">
+		select board_file from board where board_num=#{board_num}
+	</select>
+
+
+	<!-- 해당 게시글과 그 게시글에 달린 답글의 모든 댓글 삭제 -->
+	<!-- 게시글을 삭제하기 위한 선행 조건 -->
+	<delete id="replydel" parameterType="int">
+		delete from board_reply
+		where board_num in (
+                    select r.board_num
+                    from board b, board_reply r
+                    where b.board_num = r.board_num
+                    and r.board_num in (select board_num
+                                        from  board
+                                        where board_ref = (select board_ref 
+                                                        from board 
+                                                        where board_num = #{board_num})))
+	</delete> 
+		
+	<!-- Q&A 삭제 -->
+	<delete id="del" parameterType="int">
+		delete from board where board_ref = #{board_ref}
+	</delete>
+	
+	<!-- 답글의 댓글 삭제 -->
+	<!-- 답변글을 삭제하기 위한 선행 조건 -->
+	<delete id="replydel2" parameterType="int">
+		delete from board_reply where board_num = #{board_num}
+	</delete>
+	
+	<!-- Q&A 답변글 삭제 -->
+	<delete id="del2" parameterType="int">
+		delete from board where board_num = #{board_num}
+	</delete>
+	
+	
+	<resultMap type="dto.BoardDTO" id="b_list_r_view" autoMapping="true" >
+		<collection property="replyList" javaType="java.util.List" ofType="dto.Board_ReplyDTO" autoMapping="false" >
+			<id column="board_num" property="board_num" />
+			<result column="reply_num" property="reply_num" />
+			<result column="reply_writer" property="reply_writer" />
+			<result column="reply_content" property="reply_content" />
+			<result column="reply_regdate" property="reply_regdate" />
+			<result column="reply_like" property="reply_like" />
+		</collection>
+	</resultMap>
+	
+	<!-- 댓글 출력 -->
+	<select id="b_view" parameterType="int" resultMap="b_list_r_view">
+		select b.*, r.*
+		from board b, board_reply r
+		where b.board_num=r.board_num(+)
+		and b.board_num=#{board_num}
+		order by r.reply_num desc
+	</select>
+	
+	<!-- 카테고리별 list 출력 -->
+	<select id="category_list" parameterType="java.util.HashMap" resultType="dto.BoardDTO">
+	<![CDATA[
+      select b.* 
+      from (select rownum as rm, a.* 
+      		from (select * 
+      				from board
+                    where board_type = #{board_type}
+      				order by board_ref desc, board_num) a)b
+      where b.rm>=#{startRow} and b.rm<=#{endRow}
+      ]]>
+	</select>
+	
+	<!-- 카테고리별 레코드 수 출력 -->
+	<select id="category_count" parameterType="String" resultType="int">
+		select count(*) 
+		from board
+		where board_type = #{board_type}
+	</select>
+	
+	<!-- 공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항 -->
+	<!-- 공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항 -->
+	<!-- 공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항공지사항 -->
+	
+	<!-- 공지사항 레코드 수 출력 -->
+	<select id="notice_count" parameterType="String" resultType="int">
+		select count(*) 
+		from board_notice
+		where notice_writer = 'nanaland'
+	</select>
+	
+	<!-- 공지사항 list 출력 -->
+	<select id="notice_list" parameterType="dto.PageDTO" resultType="dto.NoticeDTO">
+      <![CDATA[
+      select b.* 
+      from (select rownum as rm, a.* 
+      		from (select * 
+      				from board_notice
+      				where notice_writer = 'nanaland'
+      				order by notice_num desc) a)b
+      where b.rm>=#{startRow} and b.rm<=#{endRow}
+      ]]>
+	</select>
+	
+	<!-- 공지사항 조회 수 증가 -->
+	<update id="notice_readCount" parameterType="int">
+		update board_notice
+		set notice_count =
+		notice_count + 1
+		where notice_num = #{notice_num}
+	</update>
+	
+	<!-- num 값에 해당하는 공지사항 보여주기 -->
+	<select id="notice_content" parameterType="int" resultType="dto.NoticeDTO">
+		select * from board_notice
+		where notice_num = #{notice_num}
+	</select>
+	
+	
+	<!-- 공지사항 쓰기 -->
+	<insert id="notice_save" parameterType="dto.NoticeDTO">
+		insert into
+		board_notice(notice_num, notice_writer, notice_title, notice_regdate, notice_count, notice_content, notice_file)
+		values(notice_num_seq.nextval, #{notice_writer}, #{notice_title}, sysdate, 0, #{notice_content}, #{notice_file,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 공지사항 업데이트 -->
+	<update id="notice_upt" parameterType="dto.NoticeDTO">
+		update board_notice
+		set notice_title = #{notice_title}, notice_content = #{notice_content}
+		<!-- 여기 if 문안에 있는 upload 는 새로 들어오는 업로드를 얘기하는거다 기존꺼가 아니라 -->
+		<if test="notice_file!=null">
+			,notice_file = #{notice_file}
+		</if>
+		where notice_num = #{notice_num}
+	</update>
+
+	<!-- 수정,삭제 위한 -->
+	<select id="notice_uploadFile" parameterType="int" resultType="String">
+		select notice_file from board_notice where notice_num=#{notice_num}
+	</select>
+	
+	<!-- 공지사항 삭제 -->
+	<delete id="notice_del" parameterType="int">
+		delete from board_notice where notice_num = #{notice_num}
+	</delete>
+	
+	<!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 -->
+	<!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 -->
+	<!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 --><!-- 검색 -->
+	
+	<!-- Q&A 검색 레코드 수 출력 -->
+	<select id="search_count" parameterType="dto.BoardDTO" resultType="int">
+		select count(*) 
+		from board
+		where lower(board_writer) like '%' || lower(#{board_writer}) || '%' or lower(board_title) like '%' || lower(#{board_title}) || '%'
+	</select>
+	
+	<!-- Q&A 검색 -->
+	<select id="board_search" parameterType="java.util.HashMap" resultType="dto.BoardDTO">
+		<![CDATA[
+      	select b.* 
+      	from (select rownum as rm, a.* 
+				from (select * 
+					from board
+                    where lower(board_writer) like '%' || lower(#{board_writer}) || '%' or lower(board_title) like '%' || lower(#{board_title}) || '%'
+      				order by board_num desc) a)b
+      	where b.rm>=#{startRow} and b.rm<=#{endRow}
+      	]]>
+	</select>
+	
+	<!-- notice 검색 레코드 수 출력 -->
+	<select id="notice_searchcount" parameterType="dto.NoticeDTO" resultType="int">
+		select count(*) 
+		from board_notice
+		where lower(notice_writer) like '%' || lower(#{notice_writer}) || '%' or lower(notice_title) like '%' || lower(#{notice_title}) || '%'
+	</select>
+	
+	<!-- notice 검색 -->
+	<select id="notice_search" parameterType="java.util.HashMap" resultType="dto.NoticeDTO">
+		<![CDATA[
+      	select b.* 
+      	from (select rownum as rm, a.* 
+				from (select * 
+					from board_notice
+                    where lower(notice_writer) like '%' || lower(#{notice_writer}) || '%' or lower(notice_title) like '%' || lower(#{notice_title}) || '%'
+      				order by notice_num desc) a)b
+      	where b.rm>=#{startRow} and b.rm<=#{endRow}
+      	]]>
+	</select>
+	
+	<!-- 메인페이지 공지사항 출력용 쿼리입니다. -->
+	<select id="main_notice" resultType="dto.NoticeDTO">
+      <![CDATA[
+      select b.* 
+      from (select rownum as rm, a.* 
+      		from (select * 
+      				from board_notice
+      				order by notice_num desc) a)b
+      where b.rm>=1 and b.rm<=5
+      ]]>
+	</select>
+</mapper>
+

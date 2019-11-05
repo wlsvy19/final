@@ -1,0 +1,173 @@
+@charset "UTF-8";
+/* 전체 영역 설정 */
+
+html, body { 
+   width : 100%;
+   height:100%;
+   background-color: #1f1f2e;
+}
+
+
+#allarea {
+   width: 100%;
+   height : 100%;
+   margin: auto;
+}
+
+#allarea_left{
+   float: left;
+   width: 23%;
+   height: 100%;
+}
+
+#allarea_right{
+   float : right;
+   width: 77%;
+   height: 100%;
+   background-color: white;
+   padding-bottom: 10%;
+}
+
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+/* 네이게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터네비게이터 */
+#menuarea{
+   text-align: center;
+   width: 90%;
+   height : 100%;
+   color : white;
+}
+
+#manager_logo{
+   width: 67%;
+   height: 130px;
+   size: 100%;
+   float: left;
+   margin-left: 2%;
+   margin-top: 10%;
+   margin-bottom: 15%;
+}
+
+.managerImgBtn, .managerImgBtn2, .managerImgBtn3{
+   width: 50%;
+   height: 40px;
+   size: 100%;
+   float: left;
+   margin-left: 8%;
+   margin-bottom: 7%;
+}
+
+.managerImgBtn2{
+   width: 70%;
+}
+
+.managerImgBtn3{
+   width: 45%;
+}
+
+
+#menu{
+   width: 90%;
+   margin: auto;
+   text-align: right;
+   font-size: 30px;
+   margin-top: 3%;
+}
+
+hr:nth-of-type(1){
+   width: 90%;
+   height: 2px;
+   
+   margin:auto;
+   margin-top: 10px;
+   
+   background: black;
+   border: 0px;
+}
+
+#chattingBox{
+   width: 90%;
+   height: 500px; /*임의*/
+   
+   margin:auto;
+   margin-top: 10px;
+   
+   /* background-color: yellow; */
+}
+
+#chattingList{
+   width: 50%;
+   height: 100%;
+   
+   float : left;
+   border-right: 1px dashed #ccc;
+   
+   overflow: auto;
+   
+   /* background-color: red; */
+}
+
+#chattingArea{
+   width: 49.4%;
+   height: 100%;
+   
+   float : right;
+   
+   /* background-color: blue; */
+   /* border: 1px solid #ccc; */
+   /* border-radius: 10px; */
+}
+
+#chatarea{
+	width: 100%;
+}
+
+.listBox{
+   width: 95%;
+   height: 20%;
+   padding : 1%;
+   
+   border-bottom: 1px solid #EAEAEA;
+   
+   cursor: pointer;
+}
+
+.list_left{
+   width: 25%;
+   height: 100%;
+   
+   float: left;
+}
+
+.listImg{
+   width: 70%;
+   height: 70%;
+   padding : 15%;
+}
+
+.list_right{
+   width: 73%;
+   height: 100%;
+   
+   float: right;
+   margin-left: 2%;
+}
+
+.listResultTable{
+   width: 100%;
+   line-height : 1.6;
+   
+   margin: auto;
+   margin-top : 6%;
+   
+   border-collapse: collapse;
+   background-color: white;
+   
+   /* border-bottom: 1px solid #EAEAEA; */
+}
+
+.listResultTable tr{
+   /* border: 1px solid #EAEAEA; */
+   border-left: none;
+   border-right: none;
+   font-family: 나눔바른펜;
+}

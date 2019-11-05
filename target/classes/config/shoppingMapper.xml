@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="shopping">
+	<select id="all" resultType="dto.ShoppingDTO">
+      select * from shopping
+      order by shop_regdate
+      desc
+   </select>
+   
+   <select id="allb" resultType="dto.ShoppingDTO">
+      select * from shopping
+      order by shop_starcnt
+      desc
+   </select>
+   
+   <select id="allp" resultType="dto.ShoppingDTO">
+      select * from shopping
+      order by shop_sellcnt
+      desc
+   </select>
+   
+   <select id="list" parameterType="String" resultType="dto.ShoppingDTO">
+      select * from shopping
+      where shop_code = #{category}
+      order by shop_regdate
+      desc
+   </select>
+   
+   <select id="listb" parameterType="String" resultType="dto.ShoppingDTO">
+      select * from shopping
+      where shop_code = #{category}
+      order by shop_starcnt
+      desc
+   </select>
+   
+   <select id="listp" parameterType="String" resultType="dto.ShoppingDTO">
+      select * from shopping
+      where shop_code = #{category}
+      order by shop_sellcnt
+      desc
+   </select>
+	
+	<!-- 
+	<select id="info" parameterType="int" resultType="dto.ShoppingDTO">
+		select * from shopping
+		where shop_num = #{shop_num}
+	</select>
+	 -->
+	 
+	 <!-- 상세페이지 들어갈때 상품의 정보 + 그 상품에 달린 댓글의 정보 가지고 오기 -->
+  <resultMap type="dto.ShoppingDTO" id="infoAll">
+         <result column="shop_num" property="shop_num" />
+         <result column="shop_name" property="shop_name" />
+         <result column="shop_code" property="shop_code" />
+         <result column="shop_price" property="shop_price" />
+         <result column="shop_regdate" property="shop_regdate" />
+         <result column="shop_sellcnt" property="shop_sellcnt" />
+         <result column="shop_stock" property="shop_stock" />
+         <result column="shop_imgpath" property="shop_imgpath" />
+         <result column="shop_starcnt" property="shop_starcnt" />
+         
+         <collection property="replyList" javaType="java.util.List" ofType="dto.Shopping_ReplyDTO"  autoMapping="false" >
+         <!-- <id column="rno" property="rno" /> -->
+         <result column="shop_num" property="shop_num" />
+         <result column="sreply_num" property="sreply_num" />
+         <result column="sreply_writer" property="sreply_writer" />
+         <result column="sreply_content" property="sreply_content" />
+         <result column="sreply_regdate" property="sreply_regdate" />
+         <result column="sreply_star" property="sreply_star" />
+         
+         <collection property="mFileList" javaType="java.util.List" ofType="dto.Shopping_FileDTO" autoMapping="false">
+            <result column="shop_file" property="shop_file"/>
+         </collection>
+         
+      </collection>
+      
+   </resultMap>
+   
+   <select id="info" parameterType="int" resultMap="infoAll">
+      select s.*, sr.*, sf.shop_file
+     from shopping s, shopping_reply sr, shopping_file sf
+     where s.SHOP_NUM = sr.SHOP_NUM(+) and sr.SREPLY_NUM = sf.SREPLY_NUM(+) and s.SHOP_NUM = #{shop_num} order by sr.SREPLY_NUM
+   </select>
+   
+   
+   <resultMap type="dto.ShoppingDTO" id="cartAll">
+  		<result column="shop_num" property="shop_num" />
+   		<result column="shop_name" property="shop_name" />
+   		<result column="shop_code" property="shop_code" />
+   		<result column="shop_price" property="shop_price" />
+   		<result column="shop_regdate" property="shop_regdate" />
+   		<result column="shop_sellcnt" property="shop_sellcnt" />
+   		<result column="shop_stock" property="shop_stock" />
+   		<result column="shop_imgpath" property="shop_imgpath" />
+   		<result column="shop_starcnt" property="shop_starcnt" />
+  		<association property="cartList" javaType="dto.Shopping_CartDTO">
+  			<result column="cart_buycount" property="cart_buycount"/>
+  		</association>
+  	</resultMap>
+   
+   <select id="cartInfo" parameterType="String" resultMap="cartAll">
+	select * from shopping s, shopping_cart sc
+	where s.shop_num = sc.shop_num and sc.mem_id = #{mem_id}
+   </select>
+   
+	
+	<select id="likeChk" parameterType="dto.Shopping_LikeDTO" resultType="dto.ShoppingDTO">
+		select * from shopping_like
+		where mem_id = #{mem_id} and shop_num = #{shop_num}
+	</select>
+		
+	<insert id="likeOn" parameterType="dto.Shopping_LikeDTO">
+		insert into shopping_like values(#{mem_id}, #{shop_num})
+	</insert>
+	
+	<delete id="likeOff" parameterType="dto.Shopping_LikeDTO">
+		delete from shopping_like where mem_id = #{mem_id} and shop_num = #{shop_num}
+	</delete>
+	
+	<insert id="cartIn" parameterType="dto.Shopping_CartDTO">
+		insert into shopping_cart values(#{mem_id}, #{shop_num}, #{cart_buycount})
+	</insert>
+	
+	<select id="cartNum" parameterType="dto.Shopping_CartDTO" resultType="dto.Shopping_CartDTO">
+		select * from shopping_cart where mem_id = #{mem_id} and shop_num = #{shop_num}
+	</select>
+	
+	<select id="cartList" parameterType="String" resultType="int">
+		select shop_num from shopping_cart where mem_id = #{mem_id}
+	</select>
+	
+	<delete id="cartDel" parameterType="dto.Shopping_CartDTO">
+		delete from shopping_cart where mem_id = #{mem_id} and shop_num = #{shop_num}
+	</delete>
+	
+	<update id="cartUpt" parameterType="dto.Shopping_CartDTO">
+      update shopping_cart set cart_buycount = #{cart_buycount} where mem_id = #{mem_id} and shop_num = #{shop_num}
+   </update>
+   
+   <select id="payMemInfo" parameterType="String" resultType="dto.MemberDTO">
+      select * from member where mem_id = #{mem_id}
+   </select>
+   
+   <delete id="payComplete" parameterType="String">
+      delete from shopping_cart where mem_id = #{mem_id}
+   </delete>
+   
+   <insert id="puchaseIn" parameterType="dto.PurchaseDTO">
+      insert into purchase values(purchase_num_seq.nextval, #{mem_id}, #{shop_num}, #{purchase_name}, #{purchase_phone}, #{purchase_cnt}, #{purchase_totalprice}, sysdate, 0, #{purchase_oaddress}, #{purchase_address}, #{purchase_detailaddress})
+   </insert>
+   
+   <update id="memPointUpt" parameterType="dto.MemberDTO">
+      update member set mem_point = #{mem_point} where mem_id = #{mem_id}
+   </update>
+   
+   <update id="shoppingUpt" parameterType="dto.PurchaseDTO">
+      update shopping set shop_sellcnt = shop_sellcnt+#{purchase_cnt} , shop_stock = shop_stock-#{purchase_cnt} where shop_num = #{shop_num}
+   </update>
+	
+	<!-- =========================== 상품 후기 댓글 처리하는 부분 ============================= -->
+   <!-- 후기 댓글 추가를 하기 위한 쿼리 -->
+   <insert id="deplyInsert" parameterType="dto.Shopping_ReplyDTO" >
+         insert into shopping_reply
+      values (#{shop_num}, sreply_num_seq.nextval, #{sreply_writer,jdbcType=VARCHAR}, #{sreply_content,jdbcType=VARCHAR}, sysdate, #{sreply_star})
+   </insert>
+   
+   <!-- 방금 입력된 댓글의 댓글 번호를 가지고 오기 위한 쿼리 -->
+   <select id="deplyNum" resultType="int">
+         select max(sreply_num) from shopping_reply
+   </select>
+   
+   <!-- 후기 댓글 추가를 할때 추가되는 멀티파일 처리를 위한 쿼리 -->
+   <insert id = "deplyMultiInsert" parameterType="dto.Shopping_FileDTO">
+         insert into shopping_file
+         values (#{sreply_num}, #{shop_file,jdbcType=VARCHAR}, #{shop_num})
+         <!-- values
+            <foreach collection="list" item="dto" separator=",">
+               (sreply_num_val, #{dto.shop_file,jdbcType=VARCHAR}, #{dto.shop_num})
+            </foreach> -->
+   </insert>
+   
+   <resultMap type="dto.Shopping_ReplyDTO" id="replyMulti">
+         <!-- property="dto의 멤버변수", column="쿼리문을 실행해서 가지고 오는 컬럼값" -->
+         <result property="shop_num" column="shop_num"/>
+         <!-- <id property="shop_num" column="shop_num"/> -->
+         <result property="sreply_num" column="sreply_num"/>
+         <result property="sreply_writer" column="sreply_writer"/>
+         <result property="sreply_content" column="sreply_content"/>
+         <result property="sreply_regdate" column="sreply_regdate"/>
+         <result property="sreply_star" column="sreply_star"/>
+         
+         <!-- mFileList에 대한 타입지정은 javaType으로 지정해주고 -->
+      <!-- List안에 저장될 타입을(제네릭타입을) 선언해 주어야 한다 이는 ofType에서 지정 -->
+      <collection property="mFileList" javaType="java.util.List" ofType="dto.Shopping_FileDTO" autoMapping="true">
+         <!-- <result column="shop_file" property="shop_file"/> -->
+      </collection>
+         
+   </resultMap>
+   
+   <!-- 1:M (일대다)관계 -->
+   <!-- collection : join에서 1 대 N의 관계 -->
+   <!-- 후기 댓글 전체 리스트를 가지고 오기 위한 쿼리 -->
+   <select id="deplyAll" parameterType = "int" resultMap="replyMulti">
+         select sr.SHOP_NUM, sr.SREPLY_NUM, sr.SREPLY_WRITER ,sr.SREPLY_CONTENT, sr.SREPLY_REGDATE, sr.SREPLY_STAR, sf.shop_file
+      from shopping_reply sr, shopping_file sf
+      where sr.SREPLY_NUM = sf.SREPLY_NUM(+) and sr.SHOP_NUM = #{shop_num} order by sr.SREPLY_NUM
+   </select>
+   
+   <!-- 후기 댓글의 첨부파일을 삭제하기 위한 쿼리 -->
+   <delete id="sreplyFileDelete" parameterType="int">
+      delete from shopping_file
+      where sreply_num = #{sreply_num}
+   </delete>
+   
+   <!-- 후기 댓글삭제를 위한 쿼리 -->
+   <delete id="sreplyDelete" parameterType="int">
+      delete from shopping_reply
+      where sreply_num = #{sreply_num}
+   </delete>
+   
+   <!-- 수정하려고 선택한 파일들을 가지고 오기 위한 쿼리 -->
+   <select id="sreplyUpdateFile" parameterType="int" resultType="dto.Shopping_FileDTO">
+      select shop_file from shopping_file
+      where sreply_num = #{sreply_num}
+   </select>
+   
+   <!-- 멀티파일 제외하고 수정할 사항 수정하기 위한 쿼리 -->
+   <update id="sreplyUpdateOther" parameterType="dto.Shopping_ReplyDTO">
+      update shopping_reply 
+      set sreply_writer = #{sreply_writer,jdbcType=VARCHAR}, sreply_content = #{sreply_content,jdbcType=VARCHAR}, sreply_regdate = sysdate, sreply_star = #{sreply_star}
+      where sreply_num = #{sreply_num}
+   </update>
+   
+   <!-- 기존파일중 남아있어야하는 것 이외의 파일 삭제하기 위한 쿼리 -->
+   <delete id="sdeplyDeleteOther" parameterType="dto.Shopping_FileDTO">
+      delete from shopping_file
+      where sreply_num = #{sreply_num} and shop_file not like '%' || #{shop_file} || '%'
+   </delete>
+   
+   <!-- 상품 후기 작성 권한을 주기 위해 해당상품에 대한 회원의 배송상태를 알아보기 위한 쿼리 -->
+   <select id="purCondition" parameterType="dto.PurchaseDTO" resultType="int">
+      select purchase_condition from PURCHASE
+      where SHOP_NUM = #{shop_num} and MEM_ID = #{mem_id}
+   </select>
+   
+   <!-- 추가 -->
+   <delete id="sdeplyDeleteOldAll" parameterType="int">
+      delete from shopping_file
+      where sreply_num = #{sreply_num}
+   </delete>
+   
+   <!-- 별점별점별점별점별점별점별점별점별점별점별점별점별점별점 -->
+   <!-- 별점별점별점별점별점별점별점별점별점별점별점별점별점별점 -->
+   <!-- 별점 계산하는 쿼리 -->
+   <select id="starCnt" parameterType="int" resultType="double">
+         select avg(sreply_star) as star_avg from shopping_reply where shop_num = #{shop_num}
+   </select>
+   
+   <!-- 계산된 별점 업로드 해주는 쿼리 -->
+   <!-- 쇼핑 테이블 업데이트 -->
+   <update id="star_up" parameterType="dto.ShoppingDTO">
+         update shopping
+      set shop_starcnt = #{shop_starcnt}
+      where SHOP_NUM = #{shop_num}
+   </update>
+   
+   <!-- 쇼핑 정보 테이블 업데이트 -->
+   <update id="starInfo_up" parameterType="dto.ShoppingDTO">
+         update shopping_info
+      set shopInfo_starcnt = #{shopInfo_starcnt}
+      where shopInfo_num = #{shopInfo_num}
+   </update>
+   
+   <!-- 별점별점별점별점별점별점별점별점별점별점별점별점별점별점 -->
+   <!-- 별점별점별점별점별점별점별점별점별점별점별점별점별점별점 -->
+   
+</mapper>   
+
+
+
+
+
+
+
+
+
+
+

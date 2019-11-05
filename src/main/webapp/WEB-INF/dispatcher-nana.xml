@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="http://www.springframework.org/schema/websocket http://www.springframework.org/schema/websocket/spring-websocket-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- ajax사용 ==> ResponseBody를 컨트롤러에서 사용 -->
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+	<!-- [1] DataSource빈 선언 -->
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver" />
+		<property name="url" value="jdbc:oracle:thin://@127.0.0.1:1521:xe" />
+		<property name="username" value="hr" />
+		<property name="password" value="a1234" />
+	</bean>
+
+	<!-- [2] SqlSessionFactoryBean 빈 선언 -->
+	<bean id="sqlSessionFactory"
+		class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:config/*Mapper.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- [3] SqlSessionTemplate 빈 선언 -->
+	<bean id="sqlSession"
+		class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+
+	<!-- [4] TransactionManager 빈 선언 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
+	<!-- [5] 선언적 트랜잭션(tx:advice) 선언 -->
+	<tx:advice id="txAdvice"
+		transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="*Process"
+				rollback-for="java.lang.Exception" />
+		</tx:attributes>
+	</tx:advice>
+
+	<!-- [6] 트랜잭션 설정 -->
+	<aop:config>
+		<aop:advisor advice-ref="txAdvice"
+			pointcut="execution(* service.Board*.*(..))" />
+	</aop:config>
+
+
+
+	<!-- [7] DAO 빈 선언 -->
+	<!-- [7] DAO 빈 선언 -->
+	<!-- [7] DAO 빈 선언 -->
+
+	<bean id="board_dao" class="dao.BoardDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="dao" class="dao.MemberDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="shoppingDao" class="dao.ShoppingDaoImp">
+		<property name="sqlSession" ref="sqlSession"></property>
+	</bean>
+
+	<bean id="discDao" class="dao.DiscDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="chatDao" class="dao.ChattingDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="countdao" class="dao.CountDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<bean id="managerdao" class="dao.ManagerDaoImp">
+		<property name="sqlSession" ref="sqlSession" />
+	</bean>
+
+	<!-- [8] Service 빈 선언 -->
+	<!-- [8] Service 빈 선언 -->
+	<!-- [8] Service 빈 선언 -->
+
+	<bean id="board_service" class="service.BoardServiceImp">
+		<property name="dao" ref="board_dao"></property>
+	</bean>
+
+	<bean id="memberservice" class="service.MemberServiceImp">
+		<property name="dao" ref="dao" />
+	</bean>
+
+	<bean id="shopService" class="service.ShoppingServiceImp">
+		<property name="dao" ref="shoppingDao" />
+	</bean>
+
+	<bean id="discService" class="service.DiscServiceImp">
+		<property name="dao" ref="discDao" />
+	</bean>
+
+	<bean id="path" class="java.lang.String">
+		<constructor-arg value="c:/temp/" />
+	</bean>
+
+	<bean id="chatService" class="service.ChattingServiceImp">
+		<property name="dao" ref="chatDao" />
+	</bean>
+
+	<bean id="countservice" class="service.CountServiceImp">
+		<property name="dao" ref="countdao" />
+	</bean>
+
+	<bean id="managerservice" class="service.ManagerServiceImp">
+		<property name="dao" ref="managerdao" />
+	</bean>
+
+	<!-- 파일 업로드 시작 -->
+	<!-- 첨부 파일의 임시기억장치 경로 설정 -->
+	<bean id="uploadDirResource"
+		class="org.springframework.core.io.FileSystemResource">
+		<constructor-arg value="./src/main/webapp/files/" />
+	</bean>
+
+	<!-- 첨부파일을 임시기억저장소에 저장한다. -->
+	<!-- 파일이 포함된 경우의 bean 아이디는 반드시 아래와 같이 입력해야한다. -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="uploadTempDir" ref="uploadDirResource" />
+		<property name="maxUploadSize" value="1000000000"></property>
+	</bean>
+
+	<bean id="newpath" class="java.lang.String">
+		<constructor-arg
+			value="C:\study\workspace_spring\finalproject\src\main\webapp\images\" />
+	</bean>
+	
+	<bean id="newpath2" class="java.lang.String">
+      <constructor-arg
+         value="C:\study\workspace_spring\.metadata\.plugins\org.eclipse.wst.server.core\tmp1\wtpwebapps\finalproject\images\" />
+   </bean>
+
+	<!-- 파일 업로드 끝 -->
+
+
+
+	<!-- controller -->
+	<!-- controller -->
+	<!-- controller -->
+
+	<!-- 메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인 -->
+	<bean class="controller.MainController">
+		<property name="memberservice" ref="memberservice" />
+		<property name="board_service" ref="board_service" />
+		<property name="board_dao" ref="board_dao" />
+		<property name="shopService" ref="shopService" />
+		<property name="discService" ref="discService" />
+		<property name="path" ref="path" />
+		<property name="chatService" ref="chatService" />
+		<property name="countservice" ref="countservice" />
+		<property name="managerservice" ref="managerservice" />
+		<property name="newpath" ref="newpath" />
+		<property name="newpath2" ref="newpath2" />
+	</bean>
+	<!-- 메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인메인 -->
+
+	<!-- NaverLoginController Class에 대한 Bean설정 추가 -->
+	<bean id="naverLoginBO" class="controller.NaverController" />
+	<context:component-scan base-package="dto" />
+	<!-- NaverLoginController Class에 대한 Bean설정 추가 -->
+
+	<!-- 다운로드 뷰 빈 선언 -->
+	<bean id="download" class="view.BoardDownLoadView">
+		<property name="dao" ref="board_dao" />
+	</bean>
+
+	<!-- view bean -->
+	<!-- view bean -->
+	<!-- view bean -->
+	<bean
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- WebSocket 등록 -->
+	<bean id="charWebSocketHandler"
+		class="controller.ChatWebSocketHandler" />
+
+	<websocket:handlers>
+		<websocket:mapping handler="charWebSocketHandler"
+			path="/chatws.do" />
+	</websocket:handlers>
+
+	<!-- tiles -->
+	<bean
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<!-- tiles 환경설정해둔것 등록해줌 -->
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/tiles.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType"
+			value="application/json;charset=UTF-8" />
+	</bean>
+
+	<!-- viewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.tiles3.TilesView" />
+		<property name="order" value="1" />
+	</bean>
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+	<!-- 네이버 로그인 성공시 페이지 넘어가는 VIEW -->
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="3" />
+	</bean>
+
+</beans>
